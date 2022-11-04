@@ -13,6 +13,6 @@ pub fn write_questions_firestore(what: Vec<String>) {
       return_data
     };
     txt_writer::WriteData {}
-        .replace(format!("List<String> firestoreLocation = [{}]", what_info), LOCATION)
+        .replace(format!("List<String> firestoreLocation = [{}]", what_info),format!("{}{}", LOCATION, "questions.dart"))
         .expect("failed when writing, please fix and try again");
 }

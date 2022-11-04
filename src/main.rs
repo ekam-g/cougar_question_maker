@@ -3,6 +3,6 @@ mod questions;
 
 fn main() {
     better_file_maker::make_folders("output").unwrap_or(());
-    println!("output file created!");
-    
+    println!("output file created!");  
+    questions::write_questions_firestore(vec!["yes".to_owned() , "cool".to_owned()]);
 }
