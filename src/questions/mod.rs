@@ -17,7 +17,13 @@ pub fn write_questions_firestore_opened(what: Vec<String>) {
 }
 
 pub fn make_open_questions(what: Vec<String>) {
+    const YES : &str = "";
     for info in what {
-        txt_writer::WriteData {}.add("", LOCATION).expect("failed when writing, please fix and try again");
+        txt_writer::WriteData {}.add(info, LOCATION).expect("failed when writing, please fix and try again");
     }
+}
+struct widgets{}
+
+impl widgets {
+
 }
