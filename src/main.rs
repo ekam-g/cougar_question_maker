@@ -2,8 +2,6 @@
 
 extern crate core;
 
-use better_file_maker;
-
 mod questions;
 mod input_reader;
 mod writer;
@@ -15,12 +13,21 @@ fn main() {
     let pit = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
     if let Some(what) = pit {
         let val = what.trim().split(',');
-        questions::write_questions_firestore_opened(val, "pit", true);
+        questions::write_questions_firestore_opened(val, "pitOpenEnded", true);
     }
-    let pit = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
-    if let Some(what) = pit {
+    loop {
+        let pit2 = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
+        if let Some(what) = pit2 {
+            let val = what.trim().split(',');
+            if questions::write_questions_firestore_drop_down(val, "pitDropDown").is_ok() {
+                break;
+            }
+        }
+    }
+    let scouting1 = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
+    if let Some(what) = scouting1 {
         let val = what.trim().split(',');
-        questions::write_questions_firestore_opened(val, "scouting", false);
+        questions::write_questions_firestore_opened(val, "scoutingOpenEnded", false);
     }
 
 }
