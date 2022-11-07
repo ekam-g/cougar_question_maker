@@ -1,5 +1,6 @@
 use better_file_maker;
 mod questions;
+mod input_reader;
 
 fn main() {
     better_file_maker::make_folders("output").unwrap_or(());
