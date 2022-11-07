@@ -1,4 +1,4 @@
-#[allow(dead_code)]
+#![allow(dead_code)]
 
 extern crate core;
 
@@ -14,6 +14,13 @@ fn main() {
     println!("output file created!");
     let pit = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
     if let Some(what) = pit {
-        questions::write_questions_firestore_opened(what.trim().split(','));
+        let val = what.trim().split(',');
+        questions::write_questions_firestore_opened(val, "pit", true);
     }
+    let pit = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
+    if let Some(what) = pit {
+        let val = what.trim().split(',');
+        questions::write_questions_firestore_opened(val, "scouting", false);
+    }
+
 }
