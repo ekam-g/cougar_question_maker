@@ -4,6 +4,7 @@ use better_file_maker;
 
 mod questions;
 mod input_reader;
+mod writer;
 
 fn main() {
     let user = input_reader::Input {};
