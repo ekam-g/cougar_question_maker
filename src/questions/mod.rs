@@ -28,24 +28,25 @@ pub fn make_open_questions(what: Vec<String>) -> String {
 }
 
 
-fn try_write<T : Display>(what : T) {
-    let mut error:i8 = 0;
+fn try_write<T: Display>(what: T) {
+    let mut error: i8 = 0;
     loop {
         let error_or_no = txt_writer::WriteData {}.replace(&what, LOCATION);
-        if let Ok(_) = error_or_no {
-            break;
-        }else {
-            error +=1;
-            println!("error occurred when writing, Retrying");
-            if error < 120 {
-                panic!("please make sure we can write data to drive")
+        match error_or_no {
+            Ok(_) => {
+                break;
+            }
+            Err(data_error)=> {
+                error += 1;
+                println!("error occurred when writing, Retrying\n {}", data_error);
+                if error < 120 {
+                    panic!("please make sure we can write data to drive\n{}" , data_error)
+                }
             }
         }
-
     }
 }
-struct widgets{}
 
-impl widgets {
+struct widgets {}
 
-}
+impl widgets {}
