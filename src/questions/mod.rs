@@ -23,10 +23,16 @@ pub fn write_questions_firestore_drop_down<'a>(what: Split<'a, char>, name : &'a
             if data.clone().count() < 2 {
                 return Err("Syntax Error, Please Make it Like this:  Question,answer1,answer2|Question2,answer1,answer2");
             }
+            let mut first_done = false;
             for cool in data {
-                section = format!("'{}',{}", cool, return_data);
+                if !first_done {
+                    section = format!("'{}',{}", cool, return_data);
+                }else {
+
+                    first_done = true;
+                }
             }
-            return_data = format!("[{}],{}", info, return_data);
+            return_data = format!("[{}],{}", section, return_data);
         }
         return_data
     };

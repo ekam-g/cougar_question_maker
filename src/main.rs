@@ -18,9 +18,10 @@ fn main() {
     loop {
         let pit2 = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
         if let Some(what) = pit2 {
-            let val = what.trim().split(',');
-            if questions::write_questions_firestore_drop_down(val, "pitDropDown").is_ok() {
-                break;
+            let val = what.trim().split('|');
+            match questions::write_questions_firestore_drop_down(val, "pitDropDown") {
+                Ok(_) => break,
+                Err(data) => println!("{}", data),
             }
         }
     }
