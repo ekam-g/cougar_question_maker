@@ -1,3 +1,5 @@
+extern crate core;
+
 use better_file_maker;
 mod questions;
 mod input_reader;
