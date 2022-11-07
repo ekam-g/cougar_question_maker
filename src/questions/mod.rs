@@ -16,7 +16,7 @@ pub fn write_questions_firestore_opened(what: Split<char>) {
 }
 
 pub fn write_widgets () {
-
+    
 }
 
 

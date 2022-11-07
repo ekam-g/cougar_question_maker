@@ -1,3 +1,5 @@
+#[allow(dead_code)]
+
 extern crate core;
 
 use better_file_maker;

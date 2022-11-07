@@ -12,4 +12,7 @@ impl DartWidget {
         }
         return_data
     }
+    pub fn make_text() {
+        
+    }
 }
