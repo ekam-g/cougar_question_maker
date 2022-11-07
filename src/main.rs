@@ -11,6 +11,6 @@ fn main() {
     println!("output file created!");
     let pit = user.n_or_val("Input Open Ended Questions for pit scouting and split them by comma if not write n");
     if let Some(what) = pit {
-        questions::write_questions_firestore_opened(what.split(','));
+        questions::write_questions_firestore_opened(what.trim().split(','));
     }
 }

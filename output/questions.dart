@@ -1,1 +1,1 @@
-const List<String> firestoreLocation = ['yes','mom','fuck','cool','yes',];
+const List<String> firestoreLocation = ['no','maybe','yes',];
