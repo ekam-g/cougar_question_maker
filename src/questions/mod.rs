@@ -18,17 +18,20 @@ pub fn write_questions_firestore_drop_down<'a>(what: Split<'a, char>, name : &'a
     let what_info: String = {
         let mut return_data: String = "".to_owned();
         for info in what {
+            dbg!(&info);
             let data = info.split(',');
+            dbg!(&data);
             let mut section = "".to_owned();
             if data.clone().count() < 2 {
                 return Err("Syntax Error, Please Make it Like this:  Question,answer1,answer2|Question2,answer1,answer2");
             }
             let mut first_done = false;
             for cool in data {
-                if !first_done {
-                    section = format!("'{}',{}", cool, return_data);
+                dbg!(&first_done);
+                if first_done {
+                    section = format!("'{}',{}", cool, section);
+                    dbg!(&section);
                 }else {
-
                     first_done = true;
                 }
             }
@@ -36,6 +39,7 @@ pub fn write_questions_firestore_drop_down<'a>(what: Split<'a, char>, name : &'a
         }
         return_data
     };
+    dbg!(&what_info);
     crate::writer::try_write(format!("const List<List<String>> {} = [{}];",name, what_info), false);
     Ok(())
 }
