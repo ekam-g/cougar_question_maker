@@ -6,5 +6,6 @@ fn main() {
     println!("output file created!");
     println!("Input Open Ended Questions for pit scouting");
     questions::write_questions_firestore_opened(vec!["yes".to_owned(), "cool".to_owned()]);
-    
+    questions::write_questions_firestore_opened(vec!["yes".to_owned(), "cool".to_owned()]);
+
 }
