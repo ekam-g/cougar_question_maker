@@ -1,7 +1,5 @@
 #![allow(dead_code)]
 
-extern crate core;
-
 use crate::writer::init;
 
 mod questions;
