@@ -1,4 +1,5 @@
 use std::fmt::Display;
+use crate::input_reader::Input;
 
 const LOCATION: &str = "output/questions.dart";
 
@@ -25,4 +26,10 @@ pub(crate) fn try_write<T: Display>(what: T, replace: bool) {
             }
         }
     }
+}
+
+pub fn init() -> Input {
+    better_file_maker::make_folders("output").unwrap_or(());
+    println!("output file created!");
+    Input {}
 }
