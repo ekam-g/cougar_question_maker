@@ -1,4 +1,4 @@
-mod var_write;
+pub mod var_write;
 
 use std::str::Split;
 
