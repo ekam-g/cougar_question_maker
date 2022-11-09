@@ -1,1 +1,1 @@
-const List<String> pitOpenEnded = ['mom','cool','why_this',];
+const List<String> pitOpenEnded = ['oalsihdosadn',];
