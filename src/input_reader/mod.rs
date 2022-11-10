@@ -1,6 +1,8 @@
 use std::io;
 
-pub struct Input;
+pub struct Input{
+    pub(crate) first_done : bool,
+}
 
 impl Input {
     pub fn get(&self, input: &str) -> String {

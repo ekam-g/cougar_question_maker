@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 
-use crate::writer::init;
 use questions::var_write::AskUser;
+use crate::input_reader::Input;
 
 mod questions;
 mod input_reader;
@@ -15,9 +15,9 @@ pub const ASK_USER: AskUser = AskUser {
 
 
 fn main() {
-    let ask = init();
-    ask.open_question("pitOpenEnded", "Open Ended Pit Questions: ", true);
-    ask.drop_question("pitDropDown", "DropDown Pit Questions: ");
-    ask.open_question("matchOpenEnded", "Open Ended Match Scouting Questions: ", false);
-    ask.drop_question("matchDropDown", "DropDown Scouting Questions: ");
+    Input::new()
+        .open_question("pitOpenEnded", "Open Ended Pit Questions: ", true)
+        .drop_question("pitDropDown", "DropDown Pit Questions: ")
+        .open_question("matchOpenEnded", "Open Ended Match Scouting Questions: ", false)
+        .drop_question("matchDropDown", "DropDown Scouting Questions: ");
 }
