@@ -24,3 +24,85 @@ fn main() {
         .open_question("matchNumQuestion", "Number Match Questions: ")
         .drop_question("matchDropDown", "DropDown Scouting Questions: ");
 }
+
+//Todo Initial Data Map
+//
+// Map<String, dynamic> initialData = Map<String, dynamic>();
+//
+// this.initialData = const {
+//         'Header': 'Match Scouting',
+//         'Team Number': '',
+//         'Match Number': '',
+//         'Crossed the Tarmac': false,
+//         'Autonomous Upper Hub': 0,
+//         'Autonomous Lower Hub': 0,
+//         'TeleOp Upper Hub': 0,
+//         'TeleOp Lower Hub': 0,
+//         'Endgame Upper Hub': 0,
+//         'Endgame Lower Hub': 0,
+//         'Starting Rung': "None",
+//         'Ending Rung': "None",
+//         'Upper Hub Missed': 0,
+//         'Lower Hub Missed': 0,
+//         'Comments': '',
+//       }
+//
+//
+//Todo Create a list of widgets
+//
+// List<Question>? matchFormQuestions;
+//
+// matchFormQuestions = [
+//       ShortAnswer(
+//         'Team Number',
+//         TextInputType.number,
+//         initialValue: widget.initialData['Team Number'],
+//       ),
+//       ShortAnswer('Match Number', TextInputType.number, initialValue: widget.initialData['Match Number']),
+//       /* Autonomous */
+//       CheckBoxQuestion(
+//         'Crossed the Tarmac',
+//         isChecked: widget.initialData['Crossed the Tarmac'],
+//       ),
+//       UpDownArrowQuestion(
+//         'Autonomous Upper Hub',
+//         counter: widget.initialData['Autonomous Upper Hub'],
+//       ),
+//       UpDownArrowQuestion(
+//         'Autonomous Lower Hub',
+//         counter: widget.initialData['Autonomous Lower Hub'],
+//       ),
+//       /* teleOp */
+//       UpDownArrowQuestion(
+//         'Upper Hub Missed',
+//         counter: widget.initialData['Upper Hub Missed'],
+//       ),
+//       UpDownArrowQuestion(
+//         'Lower Hub Missed',
+//         counter: widget.initialData['Lower Hub Missed'],
+//       ),
+//       UpDownArrowQuestion(
+//         'TeleOp Upper Hub',
+//         counter: widget.initialData['TeleOp Upper Hub'],
+//       ),
+//       UpDownArrowQuestion(
+//         'TeleOp Lower Hub',
+//         counter: widget.initialData['TeleOp Lower Hub'],
+//       ),
+//       /*endgame*/
+//       DropDownQuestion(
+//         'Starting Rung',
+//         ['None', 'Low', 'Middle'],
+//         answer: widget.initialData['Starting Rung'],
+//       ),
+//       DropDownQuestion(
+//         'Ending Rung',
+//         ['None', 'Low', 'Middle', 'High', 'Traversal'],
+//         answer: widget.initialData['Ending Rung'],
+//       ),
+//       ShortAnswer(
+//         'Comments',
+//         TextInputType.text,
+//         initialValue: widget.initialData['Comments'],
+//       ),
+//     ];
