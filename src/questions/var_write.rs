@@ -28,6 +28,8 @@ impl Input {
                     Ok(_) => break,
                     Err(data) => println!("{}", data),
                 }
+            } else {
+                break
             }
         }
         self
