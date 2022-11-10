@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use questions::var_write::AskUser;
 use crate::input_reader::Input;
 
