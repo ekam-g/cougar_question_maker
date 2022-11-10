@@ -1,7 +1,7 @@
 use std::io;
 
 pub struct Input{
-    pub(crate) first_done : bool,
+     pub first_done : bool,
 }
 
 impl Input {

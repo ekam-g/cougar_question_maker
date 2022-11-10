@@ -1,4 +1,5 @@
 use std::fmt::Display;
+use std::{thread, time};
 
 
 const LOCATION: &str = "output/questions.dart";
@@ -20,6 +21,7 @@ pub(crate) fn try_write<T: Display>(what: T, replace: bool) {
             Err(data_error) => {
                 error += 1;
                 println!("error occurred when writing, Retrying\n {}", data_error);
+                thread::sleep(time::Duration::from_millis(10));
                 if error < 120 {
                     panic!("please make sure we can write data to drive\n{}", data_error)
                 }
