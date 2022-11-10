@@ -32,6 +32,9 @@ impl Input {
         }
         self
     }
+    pub fn next_question(self) -> Self {
+        self
+    }
     pub fn new() -> Input {
         better_file_maker::make_folders("output").unwrap_or(());
         println!("output file created!");
