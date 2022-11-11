@@ -12,7 +12,7 @@ impl Input {
         let scouting1 = self.n_or_val(&format!("{}: {}", question, ASK_USER.open));
         if let Some(what) = scouting1 {
             let val = what.trim().split(',');
-            for add_val in questions::write_questions_firestore_opened(val) {
+            for add_val in questions::write_questions_firestore_opened(val , num_mode) {
                 if num_mode {
                     self.num_question_vec.push(add_val);
                 }else {
@@ -58,8 +58,7 @@ impl Input {
         better_file_maker::make_folders("output").unwrap_or(());
         try_write("Map<String, dynamic> initialData = Map<String, dynamic>();\n\nthis.initialData = const {
         'Header': 'Match Scouting',
-        'Team Number': 0,
-        'Match Number': 0,", true);
+        'Team Number': 0,", true);
         println!("output file created!");
         Self {
             first_done: true,
@@ -70,7 +69,12 @@ impl Input {
         }
     }
     pub fn end(self) {
-        try_write("};\nList<Question>? matchFormQuestions;\nmatchFormQuestions = [", false);
+        try_write("};\nList<Question>? matchFormQuestions;\nmatchFormQuestions = [\
+         ShortAnswer(
+        'Team Number',
+        TextInputType.number,
+        initialValue: widget.initialData['Team Number'],
+      ),", false);
         for val in self.num_question_vec {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.number,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
         }

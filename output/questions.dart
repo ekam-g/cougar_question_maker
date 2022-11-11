@@ -3,48 +3,63 @@ Map<String, dynamic> initialData = Map<String, dynamic>();
 this.initialData = const {
         'Header': 'Match Scouting',
         'Team Number': 0,
-        'Match Number': 0,
-'yes':'',
-'cool':'',
+'lanugage':'',
+'wheel type':'',
+'linux distro':'',
 
 //new question
-
-'nice':'',
-'very':'',
+'nice level':0,
+'rust level':0,
+'coolness':0,
 
 //new question
-
 'Question':['answer2','answer1',],
 'Question2':['answer2','answer1',],
 };
 List<Question>? matchFormQuestions;
-matchFormQuestions = [
+matchFormQuestions = [ShortAnswer(
+        'Team Number',
+        TextInputType.number,
+        initialValue: widget.initialData['Team Number'],
+      ),
 ShortAnswer(
-'cool',
+'coolness',
 TextInputType.number,
-initialValue: widget.initialData['cool'],
+initialValue: widget.initialData['coolness'],
 ),
 ShortAnswer(
-'yes',
+'rust level',
 TextInputType.number,
-initialValue: widget.initialData['yes'],
+initialValue: widget.initialData['rust level'],
 ),
 ShortAnswer(
-'very',
+'nice level',
 TextInputType.number,
-initialValue: widget.initialData['very'],
+initialValue: widget.initialData['nice level'],
 ),
 ShortAnswer(
-'nice',
-TextInputType.number,
-initialValue: widget.initialData['nice'],
+'linux distro',
+TextInputType.text,
+initialValue: widget.initialData['linux distro'],
+),
+ShortAnswer(
+'wheel type',
+TextInputType.text,
+initialValue: widget.initialData['wheel type'],
+),
+ShortAnswer(
+'lanugage',
+TextInputType.text,
+initialValue: widget.initialData['lanugage'],
 ),
 DropDownQuestion(
 'Question',
 ['answer2','answer1',],
-,answer: widget.initialData['Question'],),
+,answer: widget.initialData['Question']
+),
 DropDownQuestion(
 'Question2',
 ['answer2','answer1',],
-,answer: widget.initialData['Question2'],),
+,answer: widget.initialData['Question2']
+),
 ];
