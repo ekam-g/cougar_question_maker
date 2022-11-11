@@ -12,7 +12,9 @@ impl Input {
         let scouting1 = self.n_or_val(&format!("{}: {}", question, ASK_USER.open));
         if let Some(what) = scouting1 {
             let val = what.trim().split(',');
-            questions::write_questions_firestore_opened(val);
+            for add_val in questions::write_questions_firestore_opened(val) {
+                self.question_vec.push(add_val);
+            }
             if !self.first_done {
                 self.first_done = true;
             }
@@ -26,7 +28,10 @@ impl Input {
             if let Some(what) = pit2 {
                 let val = what.trim().split('|');
                 match questions::write_questions_firestore_drop_down(val) {
-                    Ok(_) => {
+                    Ok((head, vals) ) => {
+                        for header in head {
+
+                        }
                         self.first_done = true;
                         break;
                     }
@@ -51,7 +56,9 @@ impl Input {
         println!("output file created!");
         Self {
             first_done: true,
-            widget_data : "".to_owned(),
+            question_vec : vec![],
+            drop_down_header_vec : vec![],
+            drop_down_val_vec : vec![],
         }
     }
     pub fn end(self) {

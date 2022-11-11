@@ -2,7 +2,9 @@ use std::io;
 
 pub struct Input {
     pub first_done: bool,
-    pub widget_data: String,
+    pub drop_down_header_vec: Vec<String>,
+    pub drop_down_val_vec : Vec<String>,
+    pub question_vec: Vec<String>,
 }
 
 impl Input {
