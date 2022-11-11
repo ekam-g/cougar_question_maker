@@ -47,7 +47,7 @@ impl Input {
         self
     }
     pub fn next_question(self) -> Self {
-        try_write("//new question\n", false);
+        try_write("//new question", false);
         self
     }
     pub fn new() -> Self {
@@ -60,6 +60,7 @@ impl Input {
         Self {
             first_done: true,
             question_vec: vec![],
+            num_question_vec: vec![],
             drop_down_header_vec: vec![],
             drop_down_val_vec: vec![],
         }
@@ -70,9 +71,9 @@ impl Input {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.number,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
         }
         for location in 0..self.drop_down_header_vec.len() {
-            let header = self.drop_down_header_vec.get(location).expect("");
+            let header: &str = self.drop_down_header_vec.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
             try_write(format!("DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}']\n),",
-                              &header,
+                              header,
                               self.drop_down_val_vec.get(location).unwrap_or(&"error".to_owned()),
                               header
             ), false);

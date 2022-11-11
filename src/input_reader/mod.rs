@@ -5,6 +5,7 @@ pub struct Input {
     pub drop_down_header_vec: Vec<String>,
     pub drop_down_val_vec : Vec<String>,
     pub question_vec: Vec<String>,
+    pub num_question_vec : Vec<String>,
 }
 
 impl Input {
