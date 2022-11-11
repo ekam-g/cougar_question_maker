@@ -71,7 +71,7 @@ impl Input {
         }
         for location in 0..self.drop_down_header_vec.len() {
             let header = self.drop_down_header_vec.get(location).expect("");
-            try_write(format!("DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}'],),",
+            try_write(format!("DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}']\n),",
                               &header,
                               self.drop_down_val_vec.get(location).unwrap_or(&"error".to_owned()),
                               header

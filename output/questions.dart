@@ -39,10 +39,12 @@ ShortAnswer(
 TextInputType.number,
 initialValue: widget.initialData['nice'],
 ),
-DropDownQuestion(Question,
+DropDownQuestion(
+'Question',
 ['answer2','answer1',],
-,answer: widget.initialData[Question],),
-DropDownQuestion(Question2,
+,answer: widget.initialData['Question'],),
+DropDownQuestion(
+'Question2',
 ['answer2','answer1',],
-,answer: widget.initialData[Question2],),
+,answer: widget.initialData['Question2'],),
 ];
