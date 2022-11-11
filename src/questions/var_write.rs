@@ -28,9 +28,12 @@ impl Input {
             if let Some(what) = pit2 {
                 let val = what.trim().split('|');
                 match questions::write_questions_firestore_drop_down(val) {
-                    Ok((head, vals) ) => {
-                        for header in head {
-
+                    Ok((head, vals)) => {
+                        for val in head {
+                            self.drop_down_header_vec.push(val)
+                        }
+                        for val in vals {
+                            self.drop_down_val_vec.push(val)
                         }
                         self.first_done = true;
                         break;
@@ -56,15 +59,36 @@ impl Input {
         println!("output file created!");
         Self {
             first_done: true,
-            question_vec : vec![],
-            drop_down_header_vec : vec![],
-            drop_down_val_vec : vec![],
+            question_vec: vec![],
+            drop_down_header_vec: vec![],
+            drop_down_val_vec: vec![],
         }
     }
     pub fn end(self) {
         try_write("};\nList<Question>? matchFormQuestions;\nmatchFormQuestions = [", false);
-        try_write("", false);
+        for val in self.question_vec {
+            try_write(format!("ShortAnswer(\n{},\nTextInputType.number,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
+        }
+        for location in 0..self.drop_down_header_vec.len() {
+            let header = self.drop_down_header_vec.get(location).expect("");
+            try_write(format!("DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}'],),",
+                              &header,
+                              self.drop_down_val_vec.get(location).unwrap_or(&"error".to_owned()),
+                              header
+            ), false);
+        }
         try_write("];", false);
-
     }
 }
+//ShortAnswer(
+//         'Team Number',
+//         TextInputType.number,
+//         initialValue: widget.initialData['Team Number'],
+//       ),
+
+
+//DropDownQuestion(
+//         'Starting Rung',
+//         ['None', 'Low', 'Middle'],
+//         answer: widget.initialData['Starting Rung'],
+//       ),
