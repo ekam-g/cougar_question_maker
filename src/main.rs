@@ -22,7 +22,8 @@ fn main() {
         .next_question()
         .open_question("matchOpenEnded", "Open Ended Match Scouting Questions: ")
         .open_question("matchNumQuestion", "Number Match Questions: ")
-        .drop_question("matchDropDown", "DropDown Scouting Questions: ");
+        .drop_question("matchDropDown", "DropDown Scouting Questions: ")
+        .end()
 }
 
 //Todo Initial Data Map

@@ -1,7 +1,8 @@
 use std::io;
 
-pub struct Input{
-     pub first_done : bool,
+pub struct Input {
+    pub first_done: bool,
+    pub widget_data: String,
 }
 
 impl Input {
@@ -27,8 +28,8 @@ impl Input {
             let what = self.n_or_val(input);
             match what {
                 None => {
-                     return false;
-                },
+                    return false;
+                }
                 Some(data) => {
                     if data == *"y" {
                         return true;

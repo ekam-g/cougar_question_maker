@@ -1,2 +1,16 @@
-const List<String> matchDropDownHeaders = ['Question2','Question',];
-const List<List<String>> matchDropDown = [['answer2','answer1',],['answer2','answer1',],];
+Map<String, dynamic> initialData = Map<String, dynamic>();
+
+this.initialData = const {
+        'Header': 'Match Scouting',
+        'Team Number': '',
+        'Match Number': '',
+'cool':'',
+'yes':'',
+
+'dd':'',
+'bb':'',
+
+'Question':['answer2','answer1',],
+'Question2':['answer2','answer1',],
+
+};
