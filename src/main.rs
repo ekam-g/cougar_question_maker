@@ -16,9 +16,9 @@ pub const ASK_USER: AskUser = AskUser {
 
 fn main() {
     Input::new()
-        .open_question("Open Ended Questions: ")
+        .open_question("Open Ended Questions: ", false)
         .next_question()
-        .open_question("Number Questions: ")
+        .open_question("Number Questions: ", true)
         .next_question()
         .drop_question("DropDown Questions: ")
         .end()

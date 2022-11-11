@@ -8,12 +8,16 @@ pub struct AskUser<'a> {
 }
 
 impl Input {
-    pub(crate) fn open_question(mut self, question: &str) -> Self {
+    pub(crate) fn open_question(mut self, question: &str, num_mode : bool) -> Self {
         let scouting1 = self.n_or_val(&format!("{}: {}", question, ASK_USER.open));
         if let Some(what) = scouting1 {
             let val = what.trim().split(',');
             for add_val in questions::write_questions_firestore_opened(val) {
-                self.question_vec.push(add_val);
+                if num_mode {
+                    self.num_question_vec.push(add_val);
+                }else {
+                    self.question_vec.push(add_val);
+                }
             }
             if !self.first_done {
                 self.first_done = true;
@@ -67,8 +71,11 @@ impl Input {
     }
     pub fn end(self) {
         try_write("};\nList<Question>? matchFormQuestions;\nmatchFormQuestions = [", false);
-        for val in self.question_vec {
+        for val in self.num_question_vec {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.number,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
+        }
+        for val in self.question_vec {
+            try_write(format!("ShortAnswer(\n{},\nTextInputType.text,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
         }
         for location in 0..self.drop_down_header_vec.len() {
             let header: &str = self.drop_down_header_vec.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
