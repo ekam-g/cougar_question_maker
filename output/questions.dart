@@ -2,15 +2,22 @@ Map<String, dynamic> initialData = Map<String, dynamic>();
 
 this.initialData = const {
         'Header': 'Match Scouting',
-        'Team Number': '',
-        'Match Number': '',
-'cool':'',
-'yes':'',
+        'Team Number': 0,
+        'Match Number': 0,
+        'yes':'',
+        'cool':'',
 
-'dd':'',
-'bb':'',
+//new question
 
-'Question':['answer2','answer1',],
-'Question2':['answer2','answer1',],
+        'nice':'',
+        'very':'',
 
+//new question
+
+        'Question':['answer2','answer1',],
+        'Question2':['answer2','answer1',],
 };
+List<Question>? matchFormQuestions;
+matchFormQuestions = [
+
+];

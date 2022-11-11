@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 
+use std::borrow::Borrow;
 use questions::var_write::AskUser;
 use crate::input_reader::Input;
 
@@ -16,13 +17,11 @@ pub const ASK_USER: AskUser = AskUser {
 
 fn main() {
     Input::new()
-        .open_question("pitOpenEnded", "Open Ended Pit Questions: ")
-        .open_question("pitNumQuestion", "Number Pit Questions: ")
-        .drop_question("pitDropDown", "DropDown Pit Questions: ")
+        .open_question("Open Ended Questions: ")
         .next_question()
-        .open_question("matchOpenEnded", "Open Ended Match Scouting Questions: ")
-        .open_question("matchNumQuestion", "Number Match Questions: ")
-        .drop_question("matchDropDown", "DropDown Scouting Questions: ")
+        .open_question("Number Questions: ")
+        .next_question()
+        .drop_question("DropDown Questions: ")
         .end()
 }
 
