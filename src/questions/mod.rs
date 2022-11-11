@@ -3,18 +3,22 @@ pub mod var_write;
 use std::str::Split;
 
 
-fn write_questions_firestore_opened(what: Split<char>,) {
+fn write_questions_firestore_opened(what: Split<char>,) -> Vec<String> {
+    let mut return_val = vec![];
     let what_info: String = {
         let mut return_data: String = "".to_owned();
         for info in what {
-            return_data = format!("'{}':'',\nop{}", info, return_data);
+            return_data = format!("'{}':'',\n{}", info, return_data);
+            return_val.push(format!("'{}'" , info));
         }
         return_data
     };
-    crate::writer::try_write(format!("{}", what_info), false);
+    crate::writer::try_write(what_info, false);
+    return_val
 }
 
-fn write_questions_firestore_drop_down(what: Split<char>, ) -> Result<(), &str> {
+
+fn write_questions_firestore_drop_down(what: Split<char>, ) -> Result<(Vec<String> , Vec<String>), &str> {
     let header_vec_final: Vec<String>;
     let what_info = {
         let mut header_vec: Vec<String> = vec![];
@@ -47,6 +51,6 @@ fn write_questions_firestore_drop_down(what: Split<char>, ) -> Result<(), &str> 
             ),
             false);
     }
-    Ok(())
+    Ok((header_vec_final, what_info))
 }
 
