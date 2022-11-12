@@ -23,6 +23,8 @@ fn main() {
         .open_question("Number Questions(with arrow widget, so smaller numbers in 0-80 range): ", true , true)
         .next_question()
         .drop_question("DropDown Questions: ")
+        .next_question()
+        .drop_question("DropDown Questions: ")
         .end()
 }
 

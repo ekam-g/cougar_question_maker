@@ -28,7 +28,7 @@ impl Input {
         self
     }
 
-    pub(crate) fn drop_question(mut self, question: &str) -> Self {
+    pub(crate) fn drop_question(mut self, question: &str, buttion : bool, mulitpule_choise : bool ) -> Self {
         loop {
             let pit2 = self.n_or_val(&format!("{}: {}", question, ASK_USER.drop_down));
             if let Some(what) = pit2 {
