@@ -8,14 +8,16 @@ pub struct AskUser<'a> {
 }
 
 impl Input {
-    pub(crate) fn open_question(mut self, question: &str, num_mode : bool) -> Self {
+    pub(crate) fn open_question(mut self, question: &str, num_mode: bool, arrow_mode: bool) -> Self {
         let scouting1 = self.n_or_val(&format!("{}: {}", question, ASK_USER.open));
         if let Some(what) = scouting1 {
             let val = what.trim().split(',');
-            for add_val in questions::write_questions_firestore_opened(val , num_mode) {
-                if num_mode {
+            for add_val in questions::write_questions_firestore_opened(val, num_mode) {
+                if num_mode && arrow_mode {
+                    self.arrow_vec.push(add_val);
+                } else if num_mode {
                     self.num_question_vec.push(add_val);
-                }else {
+                } else {
                     self.question_vec.push(add_val);
                 }
             }
@@ -66,6 +68,7 @@ impl Input {
             num_question_vec: vec![],
             drop_down_header_vec: vec![],
             drop_down_val_vec: vec![],
+            arrow_vec: vec![],
         }
     }
     pub fn end(self) {
@@ -80,6 +83,9 @@ impl Input {
         }
         for val in self.question_vec {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.text,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
+        }
+        for val in self.arrow_vec {
+            try_write(format!("UpDownArrowQuestion({},\ncounter: widget.initialData[{}],\n),", val, val), false);
         }
         for location in 0..self.drop_down_header_vec.len() {
             let header: &str = self.drop_down_header_vec.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
