@@ -4,7 +4,6 @@ pub struct Input {
     pub first_done: bool,
     pub drop_down : DropDownVal,
 //new dropDown Question
-
 //for single question
     pub question_vec: Vec<String>,
     pub num_question_vec : Vec<String>,
