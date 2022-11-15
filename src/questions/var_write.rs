@@ -1,4 +1,4 @@
-use crate::input_reader::Input;
+use crate::input_reader::{Input, DropDownVal};
 use crate::{ASK_USER, questions};
 use crate::writer::try_write;
 
@@ -36,10 +36,10 @@ impl Input {
                 match questions::write_questions_firestore_drop_down(val) {
                     Ok((head, vals)) => {
                         for val in head {
-                            self.drop_down_header_vec.push(val)
+                            self.drop_down.head.push(val)
                         }
                         for val in vals {
-                            self.drop_down_val_vec.push(val)
+                            self.drop_down.val.push(val)
                         }
                         self.first_done = true;
                         break;
@@ -66,8 +66,10 @@ impl Input {
             first_done: true,
             question_vec: vec![],
             num_question_vec: vec![],
-            drop_down_header_vec: vec![],
-            drop_down_val_vec: vec![],
+            drop_down : DropDownVal{
+                head :vec![],
+                val : vec![],
+            },
             arrow_vec: vec![],
         }
     }
@@ -87,11 +89,11 @@ impl Input {
         for val in self.arrow_vec {
             try_write(format!("UpDownArrowQuestion({},\ncounter: widget.initialData[{}],\n),", val, val), false);
         }
-        for location in 0..self.drop_down_header_vec.len() {
-            let header: &str = self.drop_down_header_vec.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
+        for location in 0..self.drop_down.head.len() {
+            let header: &str = self.drop_down.head.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
             try_write(format!("DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}']\n),",
                               header,
-                              self.drop_down_val_vec.get(location).unwrap_or(&"error".to_owned()),
+                              self.drop_down.val.get(location).unwrap_or(&"error".to_owned()),
                               header
             ), false);
         }

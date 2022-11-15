@@ -2,17 +2,18 @@ use std::io;
 
 pub struct Input {
     pub first_done: bool,
-    pub drop_down_header_vec: Vec<String>,
-    pub drop_down_val_vec : Vec<String>,
-    pub multi_select_question: Vec<String>,
+    pub drop_down : DropDownVal,
+//new dropDown Question
+
+//for single question
     pub question_vec: Vec<String>,
     pub num_question_vec : Vec<String>,
     pub arrow_vec : Vec<String>,
-    pub drop_down_val : DropDown
 }
 
-pub struct DropDown {
-
+pub struct DropDownVal {
+    pub head: Vec<String>,
+    pub val : Vec<String>,
 }
 
 impl Input {
