@@ -1,6 +1,6 @@
-use crate::input_reader::{Input, DropDownVal};
-use crate::{ASK_USER, questions};
+use crate::input_reader::{DropDownVal, Input};
 use crate::writer::try_write;
+use crate::{questions, ASK_USER};
 
 pub struct AskUser<'a> {
     pub open: &'a str,
@@ -8,7 +8,12 @@ pub struct AskUser<'a> {
 }
 
 impl Input {
-    pub(crate) fn open_question(mut self, question: &str, num_mode: bool, arrow_mode: bool) -> Self {
+    pub(crate) fn open_question(
+        mut self,
+        question: &str,
+        num_mode: bool,
+        arrow_mode: bool,
+    ) -> Self {
         let scouting1 = self.n_or_val(&format!("{}: {}", question, ASK_USER.open));
         if let Some(what) = scouting1 {
             let val = what.trim().split(',');
@@ -28,7 +33,7 @@ impl Input {
         self
     }
 
-    pub(crate) fn drop_question(mut self, question: &str, buttion : bool, mulitpule_choise : bool ) -> Self {
+    pub(crate) fn drop_question(mut self, question: &str, but: bool, many: bool) -> Self {
         loop {
             let pit2 = self.n_or_val(&format!("{}: {}", question, ASK_USER.drop_down));
             if let Some(what) = pit2 {
@@ -52,6 +57,16 @@ impl Input {
         }
         self
     }
+    fn where_add(mut self, but: bool, many: bool, header: Vec<String>, body: Vec<String>) -> Self {
+        for x in 0..header.len() {
+            if but {
+                
+            } else if many {
+            } else {
+            }
+        }
+        self
+    }
     pub fn next_question(self) -> Self {
         try_write("//new question", false);
         self
@@ -66,20 +81,23 @@ impl Input {
             first_done: true,
             question_vec: vec![],
             num_question_vec: vec![],
-            drop_down : DropDownVal{
-                head :vec![],
-                val : vec![],
+            drop_down: DropDownVal {
+                head: vec![],
+                val: vec![],
             },
             arrow_vec: vec![],
         }
     }
     pub fn end(self) {
-        try_write("};\nList<Question>? matchFormQuestions;\nmatchFormQuestions = [\
+        try_write(
+            "};\nList<Question>? matchFormQuestions;\nmatchFormQuestions = [\
          ShortAnswer(
         'Team Number',
         TextInputType.number,
         initialValue: widget.initialData['Team Number'],
-      ),", false);
+      ),",
+            false,
+        );
         for val in self.num_question_vec {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.number,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
         }
@@ -87,15 +105,28 @@ impl Input {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.text,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
         }
         for val in self.arrow_vec {
-            try_write(format!("UpDownArrowQuestion({},\ncounter: widget.initialData[{}],\n),", val, val), false);
+            try_write(
+                format!(
+                    "UpDownArrowQuestion({},\ncounter: widget.initialData[{}],\n),",
+                    val, val
+                ),
+                false,
+            );
         }
         for location in 0..self.drop_down.head.len() {
             let header: &str = self.drop_down.head.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
-            try_write(format!("DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}']\n),",
-                              header,
-                              self.drop_down.val.get(location).unwrap_or(&"error".to_owned()),
-                              header
-            ), false);
+            try_write(
+                format!(
+                    "DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}']\n),",
+                    header,
+                    self.drop_down
+                        .val
+                        .get(location)
+                        .unwrap_or(&"error".to_owned()),
+                    header
+                ),
+                false,
+            );
         }
         try_write("];", false);
     }
@@ -105,7 +136,6 @@ impl Input {
 //         TextInputType.number,
 //         initialValue: widget.initialData['Team Number'],
 //       ),
-
 
 //DropDownQuestion(
 //         'Starting Rung',
