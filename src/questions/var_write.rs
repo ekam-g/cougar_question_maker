@@ -40,12 +40,7 @@ impl Input {
                 let val = what.trim().split('|');
                 match questions::write_questions_firestore_drop_down(val) {
                     Ok((head, vals)) => {
-                        for val in head {
-                            self.drop_down.head.push(val)
-                        }
-                        for val in vals {
-                            self.drop_down.val.push(val)
-                        }
+                        self = self.where_add(but ,many,head, vals);
                         self.first_done = true;
                         break;
                     }
@@ -60,9 +55,14 @@ impl Input {
     fn where_add(mut self, but: bool, many: bool, header: Vec<String>, body: Vec<String>) -> Self {
         for x in 0..header.len() {
             if but {
-                
+                self.multi_select_question.head.push(header[x].clone());
+                self.multi_select_question.val.push(body[x].clone());
             } else if many {
+                self.many_choice.head.push(header[x].clone());
+                self.many_choice.val.push(body[x].clone());
             } else {
+                self.drop_down.head.push(header[x].clone());
+                self.drop_down.val.push(body[x].clone());
             }
         }
         self
@@ -85,6 +85,15 @@ impl Input {
                 head: vec![],
                 val: vec![],
             },
+            many_choice: DropDownVal {
+                head: vec![],
+                val: vec![],
+            },
+            multi_select_question: DropDownVal {
+                head: vec![],
+                val: vec![],
+            },
+
             arrow_vec: vec![],
         }
     }
