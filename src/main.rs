@@ -24,7 +24,9 @@ fn main() {
         .next_question()
         .drop_question("DropDown Questions: ", false , false)
         .next_question()
-        .drop_question("DropDown Questions: ", false, false)
+        .drop_question("Multi Select Questions: ", false, true)
+        .next_question()
+        .drop_question("Single Select Questions: ", true, false)
         .end()
 }
 

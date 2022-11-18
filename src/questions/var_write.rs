@@ -1,6 +1,6 @@
+use crate::{ASK_USER, questions};
 use crate::input_reader::{DropDownVal, Input};
 use crate::writer::try_write;
-use crate::{questions, ASK_USER};
 
 pub struct AskUser<'a> {
     pub open: &'a str,
@@ -40,7 +40,7 @@ impl Input {
                 let val = what.trim().split('|');
                 match questions::write_questions_firestore_drop_down(val) {
                     Ok((head, vals)) => {
-                        self = self.where_add(but ,many,head, vals);
+                        self = self.where_add(but, many, head, vals);
                         self.first_done = true;
                         break;
                     }
@@ -107,13 +107,13 @@ impl Input {
       ),",
             false,
         );
-        for val in self.num_question_vec {
+        for val in &self.num_question_vec {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.number,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
         }
-        for val in self.question_vec {
+        for val in &self.question_vec {
             try_write(format!("ShortAnswer(\n{},\nTextInputType.text,\ninitialValue: widget.initialData[{}],\n),", val, val), false);
         }
-        for val in self.arrow_vec {
+        for val in &self.arrow_vec {
             try_write(
                 format!(
                     "UpDownArrowQuestion({},\ncounter: widget.initialData[{}],\n),",
@@ -122,13 +122,36 @@ impl Input {
                 false,
             );
         }
-        for location in 0..self.drop_down.head.len() {
-            let header: &str = self.drop_down.head.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
+        self.write_list_widget("drop");
+        self.write_list_widget("multi");
+        self.write_list_widget("many");
+        try_write("];", false);
+    }
+    fn write_list_widget(&self, mode: &str)  {
+        let (what, vers)  = {
+            match mode {
+                "drop" => {
+                    (&self.drop_down , "DropDownQuestion")
+                }
+                "multi" => {
+                    (&self.many_choice , "MultiSelectQuestion")
+                }
+                "many" => {
+                    (&self.many_choice , "MultipleChoiceQuestion")
+                }
+                _ => {
+                    panic!("bad use of mode widget")
+                }
+            }
+        };
+        for location in 0..what.head.len() {
+            let header: &str = what.head.get(location).expect("Ram Corruption Error, Please Try Again and make sure power is being supplied to your pc");
             try_write(
                 format!(
-                    "DropDownQuestion(\n'{}',\n{}\n,answer: widget.initialData['{}']\n),",
+                    "{}(\n'{}',\n{}\n,answer: widget.initialData['{}']\n),",
+                    vers,
                     header,
-                    self.drop_down
+                    what
                         .val
                         .get(location)
                         .unwrap_or(&"error".to_owned()),
@@ -137,7 +160,6 @@ impl Input {
                 false,
             );
         }
-        try_write("];", false);
     }
 }
 //ShortAnswer(

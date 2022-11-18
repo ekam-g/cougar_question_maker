@@ -3,15 +3,23 @@ Map<String, dynamic> initialData = Map<String, dynamic>();
 this.initialData = const {
         'Header': 'Match Scouting',
         'Team Number': 0,
-'lanugage':'',
-'wheel type':'',
-'linux distro':'',
+'cool':'',
+'yes':'',
 
 //new question
-'nice level':0,
-'rust level':0,
-'coolness':0,
+'nice':0,
+'very':0,
 
+//new question
+'mac':0,
+'linux':0,
+
+//new question
+'Question':['answer2','answer1',],
+'Question2':['answer2','answer1',],
+//new question
+'Question':['answer2','answer1',],
+'Question2':['answer2','answer1',],
 //new question
 'Question':['answer2','answer1',],
 'Question2':['answer2','answer1',],
@@ -23,34 +31,50 @@ matchFormQuestions = [ShortAnswer(
         initialValue: widget.initialData['Team Number'],
       ),
 ShortAnswer(
-'coolness',
+'very',
 TextInputType.number,
-initialValue: widget.initialData['coolness'],
+initialValue: widget.initialData['very'],
 ),
 ShortAnswer(
-'rust level',
+'nice',
 TextInputType.number,
-initialValue: widget.initialData['rust level'],
+initialValue: widget.initialData['nice'],
 ),
 ShortAnswer(
-'nice level',
-TextInputType.number,
-initialValue: widget.initialData['nice level'],
-),
-ShortAnswer(
-'linux distro',
+'yes',
 TextInputType.text,
-initialValue: widget.initialData['linux distro'],
+initialValue: widget.initialData['yes'],
 ),
 ShortAnswer(
-'wheel type',
+'cool',
 TextInputType.text,
-initialValue: widget.initialData['wheel type'],
+initialValue: widget.initialData['cool'],
 ),
-ShortAnswer(
-'lanugage',
-TextInputType.text,
-initialValue: widget.initialData['lanugage'],
+UpDownArrowQuestion('linux',
+counter: widget.initialData['linux'],
+),
+UpDownArrowQuestion('mac',
+counter: widget.initialData['mac'],
+),
+DropDownQuestion(
+'Question',
+['answer2','answer1',],
+,answer: widget.initialData['Question']
+),
+DropDownQuestion(
+'Question2',
+['answer2','answer1',],
+,answer: widget.initialData['Question2']
+),
+DropDownQuestion(
+'Question',
+['answer2','answer1',],
+,answer: widget.initialData['Question']
+),
+DropDownQuestion(
+'Question2',
+['answer2','answer1',],
+,answer: widget.initialData['Question2']
 ),
 DropDownQuestion(
 'Question',
