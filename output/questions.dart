@@ -3,16 +3,16 @@ Map<String, dynamic> initialData = Map<String, dynamic>();
 this.initialData = const {
         'Header': 'Match Scouting',
         'Team Number': 0,
-'cool':'',
 'yes':'',
+'cool':'',
 
 //new question
 'nice':0,
 'very':0,
 
 //new question
-'mac':0,
-'linux':0,
+'fedora':0,
+'arch':0,
 
 //new question
 'Question':['answer2','answer1',],
@@ -41,30 +41,20 @@ TextInputType.number,
 initialValue: widget.initialData['nice'],
 ),
 ShortAnswer(
-'yes',
-TextInputType.text,
-initialValue: widget.initialData['yes'],
-),
-ShortAnswer(
 'cool',
 TextInputType.text,
 initialValue: widget.initialData['cool'],
 ),
-UpDownArrowQuestion('linux',
-counter: widget.initialData['linux'],
+ShortAnswer(
+'yes',
+TextInputType.text,
+initialValue: widget.initialData['yes'],
 ),
-UpDownArrowQuestion('mac',
-counter: widget.initialData['mac'],
+UpDownArrowQuestion('arch',
+counter: widget.initialData['arch'],
 ),
-DropDownQuestion(
-'Question',
-['answer2','answer1',],
-,answer: widget.initialData['Question']
-),
-DropDownQuestion(
-'Question2',
-['answer2','answer1',],
-,answer: widget.initialData['Question2']
+UpDownArrowQuestion('fedora',
+counter: widget.initialData['fedora'],
 ),
 DropDownQuestion(
 'Question',
@@ -76,12 +66,22 @@ DropDownQuestion(
 ['answer2','answer1',],
 ,answer: widget.initialData['Question2']
 ),
-DropDownQuestion(
+MultiSelectQuestion(
 'Question',
 ['answer2','answer1',],
 ,answer: widget.initialData['Question']
 ),
-DropDownQuestion(
+MultiSelectQuestion(
+'Question2',
+['answer2','answer1',],
+,answer: widget.initialData['Question2']
+),
+MultipleChoiceQuestion(
+'Question',
+['answer2','answer1',],
+,answer: widget.initialData['Question']
+),
+MultipleChoiceQuestion(
 'Question2',
 ['answer2','answer1',],
 ,answer: widget.initialData['Question2']
